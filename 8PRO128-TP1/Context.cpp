@@ -63,7 +63,13 @@ void Context::CommandSlide(std::string* command)
 
 void Context::CommandShow(std::string* command)
 {
-	//TODO
+	std::string name = command[1];
+	std::string findResult = FindTypeByName(name);
+
+	if (findResult == "point")
+		std::cout << (*GetPoint(name)).Item.Info() << std::endl;
+	else
+		std::cout << "Error: Name \"" + name + "\" doesn't exist (use the command \"showall\" to see created item's names)" << std::endl;
 }
 
 void Context::CommandShowAll(std::string* command)
@@ -77,7 +83,8 @@ void Context::CommandShowAll(std::string* command)
 	if (this->Points.size() > 0)
 	{
 		std::cout << "Points:" << std::endl;
-		std::for_each(this->Points.begin(), this->Points.end(), [](NamedItem<Point>& obj) { std::cout << "  " << obj.Info() << std::endl; });
+		int i = 1;
+		std::for_each(this->Points.begin(), this->Points.end(), [&i](NamedItem<Point>& obj) { std::cout << "  " << i << ". " << obj.Info() << std::endl; i++; });
 	}
 }
 
