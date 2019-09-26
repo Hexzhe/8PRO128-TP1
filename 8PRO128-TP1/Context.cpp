@@ -97,16 +97,16 @@ std::vector<NamedItem<Point>>::iterator Context::GetPoint(std::string name)
 
 void Context::CreatePoint(std::string* command)
 {
-	std::string name = command[2], p1 = command[3];
+	std::string name = command[2], strP1 = command[3];
 
-	if (p1 == "")
+	if (strP1 == "")
 	{
 		std::cout << "Error: Invalid arguments (type \"help\" for command list)" << std::endl;
 		return;
 	}
 
-	Point point1 = GetPointFromString(p1);
-	this->Points.push_back(NamedItem<Point>(name, point1));
+	Point p1 = GetPointFromString(strP1);
+	this->Points.push_back(NamedItem<Point>(name, p1));
 }
 
 std::string Context::FindTypeByName(std::string name)
