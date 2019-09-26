@@ -46,7 +46,19 @@ void Context::CommandMove(std::string* command)
 
 void Context::CommandSlide(std::string* command)
 {
-	//TODO
+	std::string name = command[1], xCount = command[2], yCount = command[3];
+	std::string findResult = FindByName(name);
+
+	if (xCount == "" || yCount == "")
+	{
+		std::cout << "Error: Invalid arguments (type \"help\" for command list)" << std::endl;
+		return;
+	}
+
+	if (findResult == "point")
+		(*(std::find_if(this->Points.begin(), this->Points.end(), [name](const NamedItem<Point>& obj) { return obj.Name == name; }))).Item.MoveRelative(std::stod(xCount), std::stod(yCount)); //TODO: Make the find stuff into a function pls god
+	else
+		std::cout << "Error: Name \"" + name + "\" doesn't exist (use the command \"showall\" to see created item's names)" << std::endl;
 }
 
 void Context::CommandShow(std::string* command)
