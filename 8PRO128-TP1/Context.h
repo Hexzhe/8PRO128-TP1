@@ -14,8 +14,8 @@ public:
 
 	void CommandCreate(std::string* command);
 	void CommandDelete(std::string* command);
-	void CommandMoveAbsolute(std::string* command);
-	void CommandMoveRelative(std::string* command);
+	void CommandMove(std::string* command);
+	void CommandSlide(std::string* command);
 	void CommandShow(std::string* command);
 	void CommandShowAll(std::string* command);
 private:

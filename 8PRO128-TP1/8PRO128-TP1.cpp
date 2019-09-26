@@ -56,13 +56,13 @@ bool ProcessInput(std::string line, Context* ctx)
 	{
 		ctx->CommandDelete(command);
 	}
-	else if (command[0] == "move" || command[0] == "moveabsolute")
+	else if (command[0] == "move")
 	{
-		ctx->CommandMoveAbsolute(command);
+		ctx->CommandMove(command);
 	}
-	else if (command[0] == "slide" || command[0] == "moverelative")
+	else if (command[0] == "slide")
 	{
-		ctx->CommandMoveRelative(command);
+		ctx->CommandSlide(command);
 	}
 	else if (command[0] == "show")
 	{

@@ -23,16 +23,28 @@ void Context::CommandDelete(std::string* command)
 
 	if (findResult == "point")
 		this->Points.erase(std::find_if(this->Points.begin(), this->Points.end(), [name](const NamedItem<Point>& obj) { return obj.Name == name; }));
-	else if (findResult == "?")
+	else
 		std::cout << "Error: Name \"" + name + "\" doesn't exist (use the command \"showall\" to see created item's names)" << std::endl;
 }
 
-void Context::CommandMoveAbsolute(std::string* command)
+void Context::CommandMove(std::string* command)
 {
-	//TODO
+	std::string name = command[1], x = command[2], y = command[3];
+	std::string findResult = FindByName(name);
+
+	if (x == "" || y == "")
+	{
+		std::cout << "Error: Invalid arguments (type \"help\" for command list)" << std::endl;
+		return;
+	}
+
+	if (findResult == "point")
+		(*(std::find_if(this->Points.begin(), this->Points.end(), [name](const NamedItem<Point>& obj) { return obj.Name == name; }))).Item.MoveAbsolute(std::stod(x), std::stod(y)); //Such an elegant language
+	else
+		std::cout << "Error: Name \"" + name + "\" doesn't exist (use the command \"showall\" to see created item's names)" << std::endl;
 }
 
-void Context::CommandMoveRelative(std::string* command)
+void Context::CommandSlide(std::string* command)
 {
 	//TODO
 }
