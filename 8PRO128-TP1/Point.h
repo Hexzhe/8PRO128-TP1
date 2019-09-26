@@ -3,9 +3,6 @@
 
 class Point
 {
-private:
-	double X;
-	double Y;
 public:
 	Point(double x = 0, double y = 0);
 	~Point() {};
@@ -16,4 +13,7 @@ public:
 	Point MoveAbsolute(double x, double y);
 	Point MoveRelative(double countX, double countY);
 	std::string Info();
+private:
+	double X;
+	double Y;
 };
