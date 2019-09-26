@@ -78,7 +78,7 @@ bool ProcessInput(std::string line, Context* ctx)
 
 void ShowHelp()
 {
-	std::cout << "==============================" << std::endl;
+	std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
 
 	std::cout << "CREATE: Create a new instance of a point/line/shape using the given coordinates under a unique name" << std::endl;
 	std::cout << "  create point [name] [x,y]" << std::endl;
@@ -109,5 +109,5 @@ void ShowHelp()
 	std::cout << "EXIT: Exit this program" << std::endl;
 	std::cout << "  exit" << std::endl;
 
-	std::cout << "==============================" << std::endl;
+	std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
 }
