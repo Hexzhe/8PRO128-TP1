@@ -32,7 +32,7 @@ bool ProcessInput(std::string line, Context* ctx)
 	if (line.length() == 0)
 		return true;
 
-	std::string command[10]; //max one command + 3 args, no spaces exept between args
+	std::string command[4]; //max one command + 3 args, no spaces exept between args
 	std::istringstream iss(line);
 	for (size_t i = 0; iss.good() && i < 5; i++)
 		iss >> command[i];
@@ -78,5 +78,36 @@ bool ProcessInput(std::string line, Context* ctx)
 
 void ShowHelp()
 {
-	std::cout << "Help" << std::endl;
+	std::cout << "==============================" << std::endl;
+
+	std::cout << "CREATE: Create a new instance of a point/line/shape using the given coordinates under a unique name" << std::endl;
+	std::cout << "  create point [name] [x,y]" << std::endl;
+	std::cout << "    e.g. \"create point pp 6,9\"" << std::endl;
+
+	std::cout << "DELETE: Delete an item from your collection using it's unique name" << std::endl;
+	std::cout << "  delete [name]" << std::endl;
+	std::cout << "    e.g. \"delete pp\"" << std::endl;
+
+	std::cout << "MOVE: Move an item to a new absolute location using it's unique name" << std::endl;
+	std::cout << "  move [name] [x,y]" << std::endl;
+	std::cout << "    e.g. \"move pp 4,20\"" << std::endl;
+
+	std::cout << "SLIDE: Translate an item relatively to it's current location using it's unique name" << std::endl;
+	std::cout << "  slide [name] [x increment] [y increment]" << std::endl;
+	std::cout << "    e.g. \"slide pp 6 -9\"" << std::endl;
+
+	std::cout << "SHOW: Show an item's informations using it's unique name" << std::endl;
+	std::cout << "  show [name]" << std::endl;
+	std::cout << "    e.g. \"show pp\"" << std::endl;
+
+	std::cout << "SHOWALL: Show all of your item's informations" << std::endl;
+	std::cout << "  showall" << std::endl;
+
+	std::cout << "HELP: Show command list" << std::endl;
+	std::cout << "  help" << std::endl;
+
+	std::cout << "EXIT: Exit this program" << std::endl;
+	std::cout << "  exit" << std::endl;
+
+	std::cout << "==============================" << std::endl;
 }

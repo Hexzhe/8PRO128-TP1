@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <sstream>
 #include <vector>
 #include <string>
 #include "NamedItem.h"
@@ -25,4 +26,5 @@ private:
 
 	std::string FindTypeByName(std::string name);
 	bool IsNameAvailable(std::string name);
+	Point GetPointFromString(std::string str);
 };

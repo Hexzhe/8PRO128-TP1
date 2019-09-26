@@ -29,17 +29,19 @@ void Context::CommandDelete(std::string* command)
 
 void Context::CommandMove(std::string* command)
 {
-	std::string name = command[1], x = command[2], y = command[3];
+	std::string name = command[1], strP1 = command[2];
 	std::string findResult = FindTypeByName(name);
 
-	if (x == "" || y == "")
+	if (strP1 == "")
 	{
 		std::cout << "Error: Invalid arguments (type \"help\" for command list)" << std::endl;
 		return;
 	}
 
+	Point p1 = GetPointFromString(strP1);
+
 	if (findResult == "point")
-		(*GetPoint(name)).Item.MoveAbsolute(std::stod(x), std::stod(y));
+		(*GetPoint(name)).Item.MoveAbsolute(p1.GetX(), p1.GetY());
 	else
 		std::cout << "Error: Name \"" + name + "\" doesn't exist (use the command \"showall\" to see created item's names)" << std::endl;
 }
@@ -95,15 +97,16 @@ std::vector<NamedItem<Point>>::iterator Context::GetPoint(std::string name)
 
 void Context::CreatePoint(std::string* command)
 {
-	std::string name = command[2], x = command[3], y = command[4];
+	std::string name = command[2], p1 = command[3];
 
-	if (x == "" || y == "")
+	if (p1 == "")
 	{
 		std::cout << "Error: Invalid arguments (type \"help\" for command list)" << std::endl;
 		return;
 	}
 
-	this->Points.push_back(NamedItem<Point>(name, Point(std::stod(x), std::stod(y))));
+	Point point1 = GetPointFromString(p1);
+	this->Points.push_back(NamedItem<Point>(name, point1));
 }
 
 std::string Context::FindTypeByName(std::string name)
@@ -117,4 +120,22 @@ std::string Context::FindTypeByName(std::string name)
 bool Context::IsNameAvailable(std::string name)
 {
 	return this->FindTypeByName(name) == "?";
+}
+
+Point Context::GetPointFromString(std::string str)
+{
+	std::vector<std::string> result;
+
+	std::stringstream  data(str);
+	std::string line;
+	while (std::getline(data, line, ','))
+		result.push_back(line);
+
+	if (result.size() != 2)
+	{
+		std::cout << "Error: Couldn't parse a coordinate from \"" << str << "\", used 0,0 instead" << std::endl;
+		return Point();
+	}
+
+	return Point(std::stod(result[0]), std::stod(result[1]));
 }
