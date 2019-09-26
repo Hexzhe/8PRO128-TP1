@@ -125,6 +125,9 @@
   <ItemGroup>
     <None Include="ResourceFiles\TP1.docx" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="8PRO128-TP1.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
