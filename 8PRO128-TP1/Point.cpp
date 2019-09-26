@@ -6,6 +6,16 @@ Point::Point(double x, double y)
 	this->Y = y;
 }
 
+double Point::GetX()
+{
+	return this->X;
+}
+
+double Point::GetY()
+{
+	return this->Y;
+}
+
 Point Point::MoveAbsolute(double x, double y)
 {
 	this->X = x;
