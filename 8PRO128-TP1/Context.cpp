@@ -19,10 +19,10 @@ void Context::CommandCreate(std::string* command)
 void Context::CommandDelete(std::string* command)
 {
 	std::string name = command[1];
-	std::string findResult = FindByName(name);
+	std::string findResult = FindTypeByName(name);
 
 	if (findResult == "point")
-		this->Points.erase(std::find_if(this->Points.begin(), this->Points.end(), [name](const NamedItem<Point>& obj) { return obj.Name == name; }));
+		this->Points.erase(GetPoint(name));
 	else
 		std::cout << "Error: Name \"" + name + "\" doesn't exist (use the command \"showall\" to see created item's names)" << std::endl;
 }
@@ -30,7 +30,7 @@ void Context::CommandDelete(std::string* command)
 void Context::CommandMove(std::string* command)
 {
 	std::string name = command[1], x = command[2], y = command[3];
-	std::string findResult = FindByName(name);
+	std::string findResult = FindTypeByName(name);
 
 	if (x == "" || y == "")
 	{
@@ -39,7 +39,7 @@ void Context::CommandMove(std::string* command)
 	}
 
 	if (findResult == "point")
-		(*(std::find_if(this->Points.begin(), this->Points.end(), [name](const NamedItem<Point>& obj) { return obj.Name == name; }))).Item.MoveAbsolute(std::stod(x), std::stod(y)); //Such an elegant language
+		(*GetPoint(name)).Item.MoveAbsolute(std::stod(x), std::stod(y));
 	else
 		std::cout << "Error: Name \"" + name + "\" doesn't exist (use the command \"showall\" to see created item's names)" << std::endl;
 }
@@ -47,7 +47,7 @@ void Context::CommandMove(std::string* command)
 void Context::CommandSlide(std::string* command)
 {
 	std::string name = command[1], xCount = command[2], yCount = command[3];
-	std::string findResult = FindByName(name);
+	std::string findResult = FindTypeByName(name);
 
 	if (xCount == "" || yCount == "")
 	{
@@ -56,7 +56,7 @@ void Context::CommandSlide(std::string* command)
 	}
 
 	if (findResult == "point")
-		(*(std::find_if(this->Points.begin(), this->Points.end(), [name](const NamedItem<Point>& obj) { return obj.Name == name; }))).Item.MoveRelative(std::stod(xCount), std::stod(yCount)); //TODO: Make the find stuff into a function pls god
+		(*GetPoint(name)).Item.MoveRelative(std::stod(xCount), std::stod(yCount));
 	else
 		std::cout << "Error: Name \"" + name + "\" doesn't exist (use the command \"showall\" to see created item's names)" << std::endl;
 }
@@ -81,6 +81,11 @@ void Context::CommandShowAll(std::string* command)
 	}
 }
 
+std::vector<NamedItem<Point>>::iterator Context::GetPoint(std::string name)
+{
+	return std::find_if(this->Points.begin(), this->Points.end(), [name](const NamedItem<Point>& obj) { return obj.Name == name; });
+}
+
 void Context::CreatePoint(std::string* command)
 {
 	std::string name = command[2], x = command[3], y = command[4];
@@ -94,9 +99,9 @@ void Context::CreatePoint(std::string* command)
 	this->Points.push_back(NamedItem<Point>(name, Point(std::stod(x), std::stod(y))));
 }
 
-std::string Context::FindByName(std::string name)
+std::string Context::FindTypeByName(std::string name)
 {
-	if (std::find_if(this->Points.begin(), this->Points.end(), [&name](const NamedItem<Point>& obj) { return obj.Name == name; }) != this->Points.end())
+	if (GetPoint(name) != this->Points.end())
 		return "point";
 	else
 		return "?";
@@ -104,5 +109,5 @@ std::string Context::FindByName(std::string name)
 
 bool Context::IsNameAvailable(std::string name)
 {
-	return this->FindByName(name) == "?";
+	return this->FindTypeByName(name) == "?";
 }

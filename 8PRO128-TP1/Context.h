@@ -20,8 +20,9 @@ public:
 	void CommandShowAll(std::string* command);
 private:
 	std::vector<NamedItem<Point>> Points;
+	std::vector<NamedItem<Point>>::iterator GetPoint(std::string name);
 	void CreatePoint(std::string* command);
 
-	std::string FindByName(std::string name);
+	std::string FindTypeByName(std::string name);
 	bool IsNameAvailable(std::string name);
 };
