@@ -1,19 +1,42 @@
 #include <iostream>
 #include <sstream>
+#include "NamedItem.h"
+#include "Point.h";
+#include "Context.h"
 
-void ShowHelp()
+bool ProcessInput(std::string line, Context* ctx);
+void ShowHelp();
+
+int main()
 {
-	std::cout << "Help" << std::endl;
+	std::cout << "8PRO128-TP1 - Jason Gilbert & Dominique Boivin" << std::endl
+		<< "Type \"help\" for command list" << std::endl;
+
+	Context* ctx = new Context();
+
+	while (true)
+	{
+		std::cout << "> " << std::flush;
+
+		std::string input;
+		std::getline(std::cin, input);
+
+		if (!ProcessInput(input, ctx))
+			break;
+	}
+
+	delete ctx;
+	return 0;
 }
 
-bool ProcessInput(std::string line)
+bool ProcessInput(std::string line, Context* ctx)
 {
 	if (line.length() == 0)
 		return true;
 
-	std::string command[10]; //max one command + 9 args, no spaces exept between args
+	std::string command[10]; //max one command + 3 args, no spaces exept between args
 	std::istringstream iss(line);
-	for (size_t i = 0; iss.good() && i < 4; i++)
+	for (size_t i = 0; iss.good() && i < 5; i++)
 		iss >> command[i];
 
 	if (command[0] == "help")
@@ -25,27 +48,37 @@ bool ProcessInput(std::string line)
 		std::cout << "Bye" << std::endl;
 		return false;
 	}
+	else if (command[0] == "create")
+	{
+		ctx->CommandCreate(command);
+	}
+	else if (command[0] == "delete")
+	{
+		ctx->CommandDelete(command);
+	}
+	else if (command[0] == "move" || command[0] == "moveabsolute")
+	{
+		ctx->CommandMoveAbsolute(command);
+	}
+	else if (command[0] == "slide" || command[0] == "moverelative")
+	{
+		ctx->CommandMoveRelative(command);
+	}
+	else if (command[0] == "show")
+	{
+		ctx->CommandShow(command);
+	}
+	else if (command[0] == "showall")
+	{
+		ctx->CommandShowAll(command);
+	}
 	else
 		std::cout << "\"" + command[0] + "\" is not a command (case-sensitive, type \"help\" for command list)" << std::endl;
 
 	return true;
 }
 
-int main()
+void ShowHelp()
 {
-	std::cout << "8PRO128-TP1 - Jason Gilbert & Dominique Boivin" << std::endl
-		<< "Type \"help\" for command list" << std::endl;
-
-	while (true)
-	{
-		std::cout << "> " << std::flush;
-
-		std::string input;
-		std::getline(std::cin, input);
-
-		if (!ProcessInput(input))
-			break;
-	}
-
-	return 0;
+	std::cout << "Help" << std::endl;
 }
