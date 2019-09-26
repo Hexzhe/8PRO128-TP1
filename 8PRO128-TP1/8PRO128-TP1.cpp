@@ -1,7 +1,5 @@
 #include <iostream>
 #include <sstream>
-#include "NamedItem.h"
-#include "Point.h";
 #include "Context.h"
 
 bool ProcessInput(std::string line, Context* ctx);

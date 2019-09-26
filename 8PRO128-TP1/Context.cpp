@@ -56,8 +56,17 @@ void Context::CommandShow(std::string* command)
 
 void Context::CommandShowAll(std::string* command)
 {
-	//TODO
-	std::cout << "Points: " << this->Points.size() << std::endl;
+	if (this->Points.size() < 1)
+	{
+		std::cout << "Empty" << std::endl;
+		return;
+	}
+
+	if (this->Points.size() > 0)
+	{
+		std::cout << "Points:" << std::endl;
+		std::for_each(this->Points.begin(), this->Points.end(), [](NamedItem<Point>& obj) { std::cout << "  " << obj.Info() << std::endl; });
+	}
 }
 
 void Context::CreatePoint(std::string* command)

@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include "NamedItem.h"
-#include "Point.h";
+#include "Point.h"
 #include <algorithm>
 
 class Context

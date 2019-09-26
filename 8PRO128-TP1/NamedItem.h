@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Point.h"
 
 template<class T>
 class NamedItem
@@ -14,4 +15,15 @@ public:
 
 	std::string Name;
 	T Item;
+
+	std::string Info()
+	{
+		return "Name: " + this->Name;
+	};
+};
+
+template<>
+std::string NamedItem<Point>::Info()
+{
+	return "Name: " + this->Name + ", " + this->Item.Info();
 };
