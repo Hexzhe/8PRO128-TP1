@@ -15,11 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="8PRO128-TP1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
