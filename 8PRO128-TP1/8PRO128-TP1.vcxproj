@@ -125,7 +125,6 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="ClassDiagram1.cd" />
-    <None Include="ResourceFiles\TP1.docx" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="8PRO128-TP1.cpp" />
