@@ -1,13 +1,21 @@
 /******************************************************************
-* Titre: Travail pratique #1 (8PRO128\TP1)
-* Auteur(e)s: Dominique Boivin (BOID31609701)
-*             Jason Gilbert (GILJ05069703)
-* Date: 2019-09-26
-* Description: TODO
+* Titre:       Travail pratique #1 (8PRO128\TP1)
+* Auteur(e)s:  Dominique Boivin (BOID31609701)
+*              Jason Gilbert (GILJ05069703)
+* Date:        2019-09-26
+* Description: Le programme se présente sous forme d'un terminal
+*              classique opérant avec des lignes de commandes.
+*              Les commandes disponibles sont documentés grace à
+*              la commande HELP comme indiqué au lancement.
+*              On peut créer des entités (point, segment, triangle,
+*              rectangle et circle) grace à la commande CREATE.
+*              On peut par la suite Les déplacer grace aux commandes
+*              MOVE (point et segment seulement) et SLIDE (tous).
+*              On peut également afficher leurs caracteristiques
+*              avec la commande SHOW et SHOWALL et les supprimer
+*              avec DELETE. EXIT permet d'arrêter le programme.
 *******************************************************************/
 
-#include <iostream>
-#include <sstream>
 #include "Context.h"
 
 bool ProcessInput(std::string line, Context* ctx);
