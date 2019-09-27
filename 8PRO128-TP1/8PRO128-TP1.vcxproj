@@ -129,11 +129,13 @@
     <ClCompile Include="8PRO128-TP1.cpp" />
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Segment.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Context.h" />
     <ClInclude Include="NamedItem.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Segment.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "Point.h"
+#include "Segment.h"
 
 template<class T>
 class NamedItem
@@ -24,6 +25,12 @@ public:
 
 template<>
 std::string NamedItem<Point>::Info()
+{
+	return "Name: " + this->Name + ", " + this->Item.Info();
+};
+
+template<>
+std::string NamedItem<Segment>::Info()
 {
 	return "Name: " + this->Name + ", " + this->Item.Info();
 };

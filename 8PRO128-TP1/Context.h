@@ -2,10 +2,8 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <string>
-#include "NamedItem.h"
-#include "Point.h"
 #include <algorithm>
+#include "NamedItem.h"
 
 class Context
 {
@@ -23,6 +21,10 @@ private:
 	std::vector<NamedItem<Point>> Points;
 	std::vector<NamedItem<Point>>::iterator GetPoint(std::string name);
 	void CreatePoint(std::string* command);
+
+	std::vector<NamedItem<Segment>> Segments;
+	std::vector<NamedItem<Segment>>::iterator GetSegment(std::string name);
+	void CreateSegment(std::string* command);
 
 	std::string FindTypeByName(std::string name);
 	bool IsNameAvailable(std::string name);
