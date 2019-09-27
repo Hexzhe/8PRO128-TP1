@@ -92,7 +92,9 @@ void ShowHelp()
 	std::cout << "  create [type] [name] [x,y] ?[x,y] ?[x,y]" << std::endl;
 	std::cout << "    e.g. \"create point pp 6,9\"" << std::endl;
 	std::cout << "    e.g. \"create segment ss 6,9 4,20\"" << std::endl;
-	std::cout << "    e.g. \"create triangle tt 6,9 4,20 6,9\"" << std::endl;
+	std::cout << "    e.g. \"create triangle tt 6,9 4,20 0,0\"" << std::endl;
+	std::cout << "    e.g. \"create rectangle rr 6,9 4,20 0,0\"" << std::endl;
+	std::cout << "      The first point represent the second point of the height, the second point represent the first point of the height and the base, and the third point represent the second point of the base" << std::endl;
 
 	std::cout << "DELETE: Delete an item from your collection using it's unique name" << std::endl;
 	std::cout << "  delete [name]" << std::endl;

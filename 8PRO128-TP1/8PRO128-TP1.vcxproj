@@ -131,6 +131,7 @@
     <ClCompile Include="8PRO128-TP1.cpp" />
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Segment.cpp" />
     <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
@@ -138,6 +139,7 @@
     <ClInclude Include="Context.h" />
     <ClInclude Include="NamedItem.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Segment.h" />
     <ClInclude Include="Triangle.h" />
   </ItemGroup>

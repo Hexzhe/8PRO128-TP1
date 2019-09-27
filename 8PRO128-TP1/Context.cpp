@@ -16,6 +16,8 @@ void Context::CommandCreate(std::string* command)
 		this->CreateSegment(command);
 	else if (type == "triangle")
 		this->CreateTriangle(command);
+	else if (type == "rectangle")
+		this->CreateRectangle(command);
 	else
 		std::cout << "Error: \"" + type + "\" is not a recognized item (case-sensitive, type \"help\" for command list)" << std::endl;
 }
@@ -31,6 +33,8 @@ void Context::CommandDelete(std::string* command)
 		this->Segments.erase(GetSegment(name));
 	else if (findResult == "triangle")
 		this->Triangles.erase(GetTriangle(name));
+	else if (findResult == "rectangle")
+		this->Rectangles.erase(GetRectangle(name));
 	else
 		std::cout << "Error: Name \"" + name + "\" doesn't exist (type \"showall\" to see created item's names)" << std::endl;
 }
@@ -85,6 +89,8 @@ void Context::CommandSlide(std::string* command)
 		(*GetSegment(name)).Item.MoveRelative(std::stod(xCount), std::stod(yCount));
 	else if (findResult == "triangle")
 		(*GetTriangle(name)).Item.MoveRelative(std::stod(xCount), std::stod(yCount));
+	else if (findResult == "rectangle")
+		(*GetRectangle(name)).Item.MoveRelative(std::stod(xCount), std::stod(yCount));
 	else
 		std::cout << "Error: Name \"" + name + "\" doesn't exist (type \"showall\" to see created item's names)" << std::endl;
 }
@@ -100,13 +106,15 @@ void Context::CommandShow(std::string* command)
 		std::cout << (*GetSegment(name)).Item.Info() << std::endl;
 	else if (findResult == "triangle")
 		std::cout << (*GetTriangle(name)).Item.Info() << std::endl;
+	else if (findResult == "rectangle")
+		std::cout << (*GetRectangle(name)).Item.Info() << std::endl;
 	else
 		std::cout << "Error: Name \"" + name + "\" doesn't exist (type \"showall\" to see created item's names)" << std::endl;
 }
 
 void Context::CommandShowAll(std::string* command)
 {
-	if (this->Points.size() < 1 && this->Segments.size() < 1 && this->Triangles.size() < 1)
+	if (this->Points.size() < 1 && this->Segments.size() < 1 && this->Triangles.size() < 1 && this->Rectangles.size() < 1)
 	{
 		std::cout << "Empty" << std::endl;
 		return;
@@ -131,6 +139,13 @@ void Context::CommandShowAll(std::string* command)
 		std::cout << "Triangles:" << std::endl;
 		int i = 1;
 		std::for_each(this->Triangles.begin(), this->Triangles.end(), [&i](NamedItem<Triangle>& obj) { std::cout << i << ". " << obj.Info() << std::endl; i++; });
+	}
+
+	if (this->Rectangles.size() > 0)
+	{
+		std::cout << "Rectangles:" << std::endl;
+		int i = 1;
+		std::for_each(this->Rectangles.begin(), this->Rectangles.end(), [&i](NamedItem<Rectangle>& obj) { std::cout << i << ". " << obj.Info() << std::endl; i++; });
 	}
 }
 
@@ -194,6 +209,27 @@ void Context::CreateTriangle(std::string* command)
 	this->Triangles.push_back(NamedItem<Triangle>(name, Triangle(p1, p2, p3)));
 }
 
+std::vector<NamedItem<Rectangle>>::iterator Context::GetRectangle(std::string name)
+{
+	return std::find_if(this->Rectangles.begin(), this->Rectangles.end(), [name](const NamedItem<Rectangle>& obj) { return obj.Name == name; });
+}
+
+void Context::CreateRectangle(std::string* command)
+{
+	std::string name = command[2], strP1 = command[3], strP2 = command[4], strP3 = command[5];
+
+	if (strP1 == "" || strP2 == "" || strP3 == "")
+	{
+		std::cout << "Error: Invalid arguments (type \"help\" for command list)" << std::endl;
+		return;
+	}
+
+	Point p1 = GetPointFromString(strP1);
+	Point p2 = GetPointFromString(strP2);
+	Point p3 = GetPointFromString(strP3);
+	this->Rectangles.push_back(NamedItem<Rectangle>(name, Rectangle(p1, p2, p3)));
+}
+
 std::string Context::FindTypeByName(std::string name)
 {
 	if (GetPoint(name) != this->Points.end())
@@ -202,6 +238,8 @@ std::string Context::FindTypeByName(std::string name)
 		return "segment";
 	else if (GetTriangle(name) != this->Triangles.end())
 		return "triangle";
+	else if (GetRectangle(name) != this->Rectangles.end())
+		return "rectangle";
 	else
 		return "?";
 }

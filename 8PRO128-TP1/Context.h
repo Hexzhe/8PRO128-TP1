@@ -30,6 +30,10 @@ private:
 	std::vector<NamedItem<Triangle>>::iterator GetTriangle(std::string name);
 	void CreateTriangle(std::string* command);
 
+	std::vector<NamedItem<Rectangle>> Rectangles;
+	std::vector<NamedItem<Rectangle>>::iterator GetRectangle(std::string name);
+	void CreateRectangle(std::string* command);
+
 	std::string FindTypeByName(std::string name);
 	bool IsNameAvailable(std::string name);
 	Point GetPointFromString(std::string str);
