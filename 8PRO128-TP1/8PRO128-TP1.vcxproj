@@ -123,6 +123,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="ResourceFiles\TP1.docx" />
   </ItemGroup>
   <ItemGroup>
@@ -130,12 +132,14 @@
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Segment.cpp" />
+    <ClCompile Include="Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Context.h" />
     <ClInclude Include="NamedItem.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Segment.h" />
+    <ClInclude Include="Triangle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

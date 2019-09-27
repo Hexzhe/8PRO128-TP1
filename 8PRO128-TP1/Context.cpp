@@ -14,6 +14,8 @@ void Context::CommandCreate(std::string* command)
 		this->CreatePoint(command);
 	else if (type == "segment")
 		this->CreateSegment(command);
+	else if (type == "triangle")
+		this->CreateTriangle(command);
 	else
 		std::cout << "Error: \"" + type + "\" is not a recognized item (case-sensitive, type \"help\" for command list)" << std::endl;
 }
@@ -27,6 +29,8 @@ void Context::CommandDelete(std::string* command)
 		this->Points.erase(GetPoint(name));
 	else if (findResult == "segment")
 		this->Segments.erase(GetSegment(name));
+	else if (findResult == "triangle")
+		this->Triangles.erase(GetTriangle(name));
 	else
 		std::cout << "Error: Name \"" + name + "\" doesn't exist (type \"showall\" to see created item's names)" << std::endl;
 }
@@ -79,6 +83,8 @@ void Context::CommandSlide(std::string* command)
 		(*GetPoint(name)).Item.MoveRelative(std::stod(xCount), std::stod(yCount));
 	else if (findResult == "segment")
 		(*GetSegment(name)).Item.MoveRelative(std::stod(xCount), std::stod(yCount));
+	else if (findResult == "triangle")
+		(*GetTriangle(name)).Item.MoveRelative(std::stod(xCount), std::stod(yCount));
 	else
 		std::cout << "Error: Name \"" + name + "\" doesn't exist (type \"showall\" to see created item's names)" << std::endl;
 }
@@ -92,13 +98,15 @@ void Context::CommandShow(std::string* command)
 		std::cout << (*GetPoint(name)).Item.Info() << std::endl;
 	else if (findResult == "segment")
 		std::cout << (*GetSegment(name)).Item.Info() << std::endl;
+	else if (findResult == "triangle")
+		std::cout << (*GetTriangle(name)).Item.Info() << std::endl;
 	else
 		std::cout << "Error: Name \"" + name + "\" doesn't exist (type \"showall\" to see created item's names)" << std::endl;
 }
 
 void Context::CommandShowAll(std::string* command)
 {
-	if (this->Points.size() < 1 && this->Segments.size() < 1)
+	if (this->Points.size() < 1 && this->Segments.size() < 1 && this->Triangles.size() < 1)
 	{
 		std::cout << "Empty" << std::endl;
 		return;
@@ -108,14 +116,21 @@ void Context::CommandShowAll(std::string* command)
 	{
 		std::cout << "Points:" << std::endl;
 		int i = 1;
-		std::for_each(this->Points.begin(), this->Points.end(), [&i](NamedItem<Point>& obj) { std::cout << "  " << i << ". " << obj.Info() << std::endl; i++; });
+		std::for_each(this->Points.begin(), this->Points.end(), [&i](NamedItem<Point>& obj) { std::cout << i << ". " << obj.Info() << std::endl; i++; });
 	}
 
 	if (this->Segments.size() > 0)
 	{
 		std::cout << "Segments:" << std::endl;
 		int i = 1;
-		std::for_each(this->Segments.begin(), this->Segments.end(), [&i](NamedItem<Segment>& obj) { std::cout << "  " << i << ". " << obj.Info() << std::endl; i++; });
+		std::for_each(this->Segments.begin(), this->Segments.end(), [&i](NamedItem<Segment>& obj) { std::cout << i << ". " << obj.Info() << std::endl; i++; });
+	}
+
+	if (this->Triangles.size() > 0)
+	{
+		std::cout << "Triangles:" << std::endl;
+		int i = 1;
+		std::for_each(this->Triangles.begin(), this->Triangles.end(), [&i](NamedItem<Triangle>& obj) { std::cout << i << ". " << obj.Info() << std::endl; i++; });
 	}
 }
 
@@ -158,12 +173,35 @@ void Context::CreateSegment(std::string* command)
 	this->Segments.push_back(NamedItem<Segment>(name, Segment(p1, p2)));
 }
 
+std::vector<NamedItem<Triangle>>::iterator Context::GetTriangle(std::string name)
+{
+	return std::find_if(this->Triangles.begin(), this->Triangles.end(), [name](const NamedItem<Triangle>& obj) { return obj.Name == name; });
+}
+
+void Context::CreateTriangle(std::string* command)
+{
+	std::string name = command[2], strP1 = command[3], strP2 = command[4], strP3 = command[5];
+
+	if (strP1 == "" || strP2 == "" || strP3 == "")
+	{
+		std::cout << "Error: Invalid arguments (type \"help\" for command list)" << std::endl;
+		return;
+	}
+
+	Point p1 = GetPointFromString(strP1);
+	Point p2 = GetPointFromString(strP2);
+	Point p3 = GetPointFromString(strP3);
+	this->Triangles.push_back(NamedItem<Triangle>(name, Triangle(p1, p2, p3)));
+}
+
 std::string Context::FindTypeByName(std::string name)
 {
 	if (GetPoint(name) != this->Points.end())
 		return "point";
 	else if (GetSegment(name) != this->Segments.end())
 		return "segment";
+	else if (GetTriangle(name) != this->Triangles.end())
+		return "triangle";
 	else
 		return "?";
 }

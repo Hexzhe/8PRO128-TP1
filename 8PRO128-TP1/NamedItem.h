@@ -2,6 +2,7 @@
 #include <string>
 #include "Point.h"
 #include "Segment.h"
+#include "Triangle.h"
 
 template<class T>
 class NamedItem
@@ -26,11 +27,17 @@ public:
 template<>
 std::string NamedItem<Point>::Info()
 {
-	return "Name: " + this->Name + ", " + this->Item.Info();
+	return "Name: " + this->Name + ", Type: Point, " + this->Item.Info();
 };
 
 template<>
 std::string NamedItem<Segment>::Info()
 {
-	return "Name: " + this->Name + ", " + this->Item.Info();
+	return "Name: " + this->Name + ", Type: Segment, " + this->Item.Info();
+};
+
+template<>
+std::string NamedItem<Triangle>::Info()
+{
+	return "Name: " + this->Name + ", Type: Triangle, " + this->Item.Info();
 };

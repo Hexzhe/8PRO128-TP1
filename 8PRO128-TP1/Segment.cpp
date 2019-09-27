@@ -24,7 +24,7 @@ Segment Segment::MoveRelative(double countX, double countY)
 
 std::string Segment::Info()
 {
-	return std::string("Type: Segment, A: " + std::to_string(this->PointA.GetX()) + "," + std::to_string(this->PointA.GetY()) + ", B: " + std::to_string(this->PointB.GetX()) + "," + std::to_string(this->PointB.GetY()) + ", Length: " + std::to_string(this->Length()));
+	return std::string("P1: " + this->PointA.Info() + ", P2: " + this->PointB.Info() + ", Length: " + std::to_string(this->Length()));
 }
 
 double Segment::Length()

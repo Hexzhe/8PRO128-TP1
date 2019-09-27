@@ -15,6 +15,5 @@ public:
 private:
 	Point PointA;
 	Point PointB;
-
 };
 

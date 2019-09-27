@@ -33,5 +33,5 @@ Point Point::MoveRelative(double countX, double countY)
 
 std::string Point::Info()
 {
-	return std::string("Type: Point, X: " + std::to_string(this->X) + ", Y: " + std::to_string(this->Y));
+	return std::string(std::to_string(this->X) + "," + std::to_string(this->Y));
 }

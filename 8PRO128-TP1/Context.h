@@ -26,6 +26,10 @@ private:
 	std::vector<NamedItem<Segment>>::iterator GetSegment(std::string name);
 	void CreateSegment(std::string* command);
 
+	std::vector<NamedItem<Triangle>> Triangles;
+	std::vector<NamedItem<Triangle>>::iterator GetTriangle(std::string name);
+	void CreateTriangle(std::string* command);
+
 	std::string FindTypeByName(std::string name);
 	bool IsNameAvailable(std::string name);
 	Point GetPointFromString(std::string str);

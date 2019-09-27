@@ -40,9 +40,9 @@ bool ProcessInput(std::string line, Context* ctx)
 	if (line.length() == 0)
 		return true;
 
-	std::string command[5]; //max one command + 4 args, no spaces exept between args
+	std::string command[6]; //max one command + 5 args, no spaces exept between args
 	std::istringstream iss(line);
-	for (size_t i = 0; iss.good() && i < 6; i++)
+	for (size_t i = 0; iss.good() && i < 7; i++)
 		iss >> command[i];
 
 	if (command[0] == "help")
@@ -89,9 +89,10 @@ void ShowHelp()
 	std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
 
 	std::cout << "CREATE: Create a new instance of an item using the given coordinates under a unique name" << std::endl;
-	std::cout << "  create [type] [name] [x,y] ?[x,y]" << std::endl;
+	std::cout << "  create [type] [name] [x,y] ?[x,y] ?[x,y]" << std::endl;
 	std::cout << "    e.g. \"create point pp 6,9\"" << std::endl;
-	std::cout << "    e.g. \"create segment ss 6,9 6,9\"" << std::endl;
+	std::cout << "    e.g. \"create segment ss 6,9 4,20\"" << std::endl;
+	std::cout << "    e.g. \"create triangle tt 6,9 4,20 6,9\"" << std::endl;
 
 	std::cout << "DELETE: Delete an item from your collection using it's unique name" << std::endl;
 	std::cout << "  delete [name]" << std::endl;
@@ -100,7 +101,7 @@ void ShowHelp()
 	std::cout << "MOVE: Move a point or a segment to a new absolute location using it's unique name" << std::endl;
 	std::cout << "  move [name] [x,y] ?[x,y]" << std::endl;
 	std::cout << "    e.g. \"move pp 4,20\"" << std::endl;
-	std::cout << "    e.g. \"move ss 4,20 4,20\"" << std::endl;
+	std::cout << "    e.g. \"move ss 4,20 6,9\"" << std::endl;
 
 	std::cout << "SLIDE: Translate an item relatively to it's current location using it's unique name" << std::endl;
 	std::cout << "  slide [name] [x increment] [y increment]" << std::endl;
