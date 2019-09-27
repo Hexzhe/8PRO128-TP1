@@ -34,6 +34,10 @@ private:
 	std::vector<NamedItem<Rectangle>>::iterator GetRectangle(std::string name);
 	void CreateRectangle(std::string* command);
 
+	std::vector<NamedItem<Circle>> Circles;
+	std::vector<NamedItem<Circle>>::iterator GetCircle(std::string name);
+	void CreateCircle(std::string* command);
+
 	std::string FindTypeByName(std::string name);
 	bool IsNameAvailable(std::string name);
 	Point GetPointFromString(std::string str);

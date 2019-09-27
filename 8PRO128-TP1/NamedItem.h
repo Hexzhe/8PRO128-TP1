@@ -4,6 +4,7 @@
 #include "Segment.h"
 #include "Triangle.h"
 #include "Rectangle.h"
+#include "Circle.h"
 
 template<class T>
 class NamedItem
@@ -47,4 +48,10 @@ template<>
 std::string NamedItem<Rectangle>::Info()
 {
 	return "Name: " + this->Name + ", Type: Rectangle, " + this->Item.Info();
+};
+
+template<>
+std::string NamedItem<Circle>::Info()
+{
+	return "Name: " + this->Name + ", Type: Circle, " + this->Item.Info();
 };

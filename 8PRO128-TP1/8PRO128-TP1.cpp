@@ -94,7 +94,9 @@ void ShowHelp()
 	std::cout << "    e.g. \"create segment ss 6,9 4,20\"" << std::endl;
 	std::cout << "    e.g. \"create triangle tt 6,9 4,20 0,0\"" << std::endl;
 	std::cout << "    e.g. \"create rectangle rr 6,9 4,20 0,0\"" << std::endl;
-	std::cout << "      The first point represent the second point of the height, the second point represent the first point of the height and the base, and the third point represent the second point of the base" << std::endl;
+	std::cout << "      The first point represents the second point of the height, the second point represents the first point of the height and the base, and the third point represents the second point of the base" << std::endl;
+	std::cout << "    e.g. \"create circle cc 6,9 4,20\"" << std::endl;
+	std::cout << "      The first point represents the center of the circle" << std::endl;
 
 	std::cout << "DELETE: Delete an item from your collection using it's unique name" << std::endl;
 	std::cout << "  delete [name]" << std::endl;

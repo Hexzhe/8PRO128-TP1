@@ -16,7 +16,7 @@ Rectangle Rectangle::MoveRelative(double countX, double countY)
 
 std::string Rectangle::Info()
 {
-	return std::string("Area: " + std::to_string(this->Area()) + ", Perimeter: " + std::to_string(this->Perimeter()) + ", Diag: " + std::to_string(this->Diag()) + "\n  Base:\n    " + this->Base.Info() + ",\n  Height:\n    " + this->Height.Info());;
+	return std::string("Area: " + std::to_string(this->Area()) + ", Perimeter: " + std::to_string(this->Perimeter()) + ", Diag: " + std::to_string(this->Diag()) + "\n  Base:\n    " + this->Base.Info() + ",\n  Height:\n    " + this->Height.Info());
 }
 
 double Rectangle::Area()
